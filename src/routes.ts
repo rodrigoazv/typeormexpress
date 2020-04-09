@@ -1,9 +1,11 @@
 import {Request, Response} from 'express';
+import {Router} from 'express';
 
-const routes = require('express').Router();
+//controllers import
+import UserController from './controllers/UserController';
 
-routes.get("/", (req: Request, res: Response)=>{
-    return res.json("hello World");
-})
+const routes: Router = Router();
+
+routes.use('/user', UserController.index);
 
 module.exports = routes;

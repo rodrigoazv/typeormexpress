@@ -1,3 +1,3 @@
-import app, { Application } from "./app";
+import  { Application } from "./app";
 
-app.listen(3333);
+new Application().setupDbAndServer();

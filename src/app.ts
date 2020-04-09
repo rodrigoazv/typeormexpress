@@ -1,5 +1,6 @@
 import express from 'express';
 import morgan from 'morgan';
+import { createConnection } from 'typeorm';
 
 //iuse
 
@@ -20,7 +21,10 @@ export class Application{
     private routes(): void{
         this.express.use(require('./routes'));
     }
+    setupDbAndServer = async () => {
+        const conn = await createConnection();
+    };
 
 }
 
-export default new Application().express
+export default new Application().express.listen(3333);
