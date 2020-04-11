@@ -18,6 +18,6 @@ module.exports = {
         "src/entity/**/*.ts"
     ],
     migrations: [
-        "src/migration/**/*.ts"
+        "src/migrations/**/*.ts"
     ],
 };
