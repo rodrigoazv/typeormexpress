@@ -15,5 +15,15 @@
     async getAll() {
         return await this.userRepository.find();
     }
+    async getById(id: string) {
+      return await this.userRepository.findOne(id);
+    }
+    
+    async insert(data: User): Promise<User>{
+      const newUser = this.userRepository.create(data);
+      return await this.userRepository.save(newUser);   
+  
+    }
+
 
  }

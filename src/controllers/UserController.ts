@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { User } from '../entity/User';
 import { UserService } from '../service/userService';
+import { getRepository, getManager } from 'typeorm';
 
 class UserController{
     public async index(req: Request , res: Response){
@@ -9,6 +10,28 @@ class UserController{
 
         return res.json(user);
     }
+    
+    public async indexId(req: Request , res: Response){
+        
+        const userService = getManager().getRepository(User);
+        const id: string = req.params.id;
+        const user = await userService.findOne(id);
+        
+        return res.json(user);
+    }
+    public async input(req: Request , res: Response){
+        let userNew = new User();
+        userNew.firstName = req.body.name;
+        userNew.lastName = req.body.lastName;
+
+        const userService = new UserService();
+        const userRepository = getRepository(User);
+        userNew = userRepository.create(userNew);
+        userNew = await userService.insert(userNew);
+
+        return res.json(userNew);
+    }
+    
 }
 
 export default new UserController();
