@@ -20,6 +20,7 @@ export class Application{
     // create typeorm connection
     private routes(): void{
         this.express.use(require('./routes'));
+        
     }
     setupDbAndServer = async () => {
         const conn = await createConnection();

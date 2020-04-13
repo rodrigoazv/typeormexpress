@@ -1,13 +1,15 @@
-import { Request, Response } from 'express';
+import { Request, Response, NextFunction } from 'express';
 import { User } from '../entity/User';
 import { UserService } from '../service/userService';
 import { getRepository, getManager } from 'typeorm';
 
+
 class UserController{
+    
+
     public async index(req: Request , res: Response){
         const userService = new UserService();
         const user: User[] = await userService.getAll();
-
         return res.json(user);
     }
     
@@ -21,15 +23,17 @@ class UserController{
     }
     public async input(req: Request , res: Response){
         let userNew = new User();
-        userNew.firstName = req.body.name;
+        userNew.firstName = req.body.firstName;
         userNew.lastName = req.body.lastName;
+            
 
         const userService = new UserService();
-        const userRepository = getRepository(User);
+        const userRepository = getManager().getRepository(User);
         userNew = userRepository.create(userNew);
-        userNew = await userService.insert(userNew);
-
+        userNew = await userService.insertOne(userNew);
         return res.json(userNew);
+        
+        
     }
     
 }

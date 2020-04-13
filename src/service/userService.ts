@@ -12,6 +12,9 @@
       /**
    * Returns array of all users from db
    */
+    instantiate(data: Object): User | undefined {
+      return this.userRepository.create(data);
+    }
     async getAll() {
         return await this.userRepository.find();
     }
@@ -19,7 +22,8 @@
       return await this.userRepository.findOne(id);
     }
     
-    async insert(data: User): Promise<User>{
+    async insertOne(data: User){
+      console.log("Create a new user", data);
       const newUser = this.userRepository.create(data);
       return await this.userRepository.save(newUser);   
   

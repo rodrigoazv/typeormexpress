@@ -6,8 +6,8 @@ import UserController from './controllers/UserController';
 
 const routes: Router = Router();
 
-routes.use('/user', UserController.index);
+routes.use('/users', UserController.index);
 routes.use('/user', UserController.input);
-routes.use('/user/:id', UserController.indexId);
+routes.use('/userid/:id', UserController.indexId);
 
 module.exports = routes;
