@@ -2,12 +2,11 @@ import {Request, Response} from 'express';
 import {Router} from 'express';
 
 //controllers import
-import UserController from './controllers/UserController';
+import userRoutes from './controllers/UserController';
 
 const routes: Router = Router();
 
-routes.use('/users', UserController.index);
-routes.use('/user', UserController.input);
-routes.use('/userid/:id', UserController.indexId);
+routes.use('/user', userRoutes);
+
 
 module.exports = routes;
