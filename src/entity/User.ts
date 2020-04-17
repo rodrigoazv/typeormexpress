@@ -2,7 +2,6 @@ import {Entity, Column, PrimaryGeneratedColumn, BeforeInsert, Unique}  from "typ
 import bcrypt from 'bcrypt';
 
 @Entity()
-@Unique(['firstName', 'lastName'])
 export class User {
 
     @PrimaryGeneratedColumn("uuid")
@@ -16,6 +15,12 @@ export class User {
 
     @Column()
     password: string;
+
+    @Column()
+    fotoKey: string;
+    
+    @Column()
+    fotoUrl: string;
 
     async setPassword(newPassword: string) {
         this.password = await bcrypt.hash(newPassword, 10);
