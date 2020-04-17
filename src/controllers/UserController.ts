@@ -7,6 +7,8 @@ import multer from 'multer';
 import multerConfig from '../config/multer';
 
 const userRoutes: Router = Router();
+
+
 userRoutes
     .route("/all")
     .get(
@@ -35,17 +37,16 @@ userRoutes
 userRoutes
     .route('/')
     .post( 
-        
         multer(multerConfig).single('file'),
-        async (req: Request , res: Response) => {
-            console.log(req.file);
+        async (req: Request, res: Response) => {
+            console.log(req.file.key)
             try{
                 let userNew = new User();
                 userNew.firstName = req.body.firstName;
                 userNew.lastName = req.body.lastName;
                 userNew.password = req.body.password;
-                userNew.fotoKey = req.file.filename;
-                userNew.fotoUrl = req.file.destination;
+                userNew.fotoKey = req.file.key;
+                userNew.fotoUrl = req.file.location;
                     
         
                 const userService = new UserService();
