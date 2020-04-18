@@ -21,7 +21,6 @@ const storageTypes = {
         }
     }),
     s3: multerS3({
-    
         s3: new AWS.S3(),
         bucket: 'biocateste',
         contentType: multerS3.AUTO_CONTENT_TYPE,
@@ -29,7 +28,6 @@ const storageTypes = {
         key: (req, file, cb):void => {
             crypto.randomBytes(16, (err, hash)=>{
                 if(err) cb(err,"erro")
-                
                 const fileName = `${hash.toString('hex')}-${file.originalname}`;
                 cb(null,fileName)
             })
@@ -51,12 +49,12 @@ export default {
             "image/png",
             "image/gif"
         ];
-        
+
         if(allowedMimes.includes(file.mimetype)) {
             cb(null, true);
         } else {
             cb(new Error("Invalid file type."));
         }
-    }  
-    
+    }
+
 }
